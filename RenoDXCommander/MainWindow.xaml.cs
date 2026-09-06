@@ -76,7 +76,8 @@ public sealed partial class MainWindow : Window
             App.Services.GetRequiredService<IShaderPackService>(),
             App.Services.GetRequiredService<IOptiScalerWikiService>(),
             App.Services.GetRequiredService<IHdrDatabaseService>(),
-            App.Services.GetRequiredService<IOptiScalerService>());
+            App.Services.GetRequiredService<IOptiScalerService>(),
+            App.Services.GetRequiredService<INtcService>());
         _compactViewBuilder = new CompactViewBuilder(this);
         _dialogService = new DialogService(this);
         _settingsHandler = new SettingsHandler(this);
@@ -86,7 +87,7 @@ public sealed partial class MainWindow : Window
         AuxInstallService.EnsureReShadeStaging(); // create staging dir (DLLs downloaded by ReShadeUpdateService)
         App.Services.GetRequiredService<CustomReShadeHashService>().EnsureInitialized(); // seed hash file on first run
         App.Services.GetRequiredService<IOptiScalerService>().SeedUserInis(); // seed OptiScaler INIs if missing
-        Title = "RHI";
+        Title = "Supreme RHI + NTC [BETA]";
         // Fire-and-forget: check/download shader packs in the background
         // When CacheAllShaders is off, skip the bulk download — packs will be fetched on demand.
         Task shaderTask;
@@ -604,6 +605,8 @@ public sealed partial class MainWindow : Window
                                     BuildOverridesPanel(target);
                                     OverridesContainer.Visibility = Visibility.Visible;
                                     NeuralRenderingContainer.Visibility = Visibility.Visible;
+                                    NtcTexturesContainer.Visibility = Visibility.Visible;
+                                    _detailPanelBuilder.PopulateNtcPanel(target);
                                     NvidiaProfileContainer.Visibility = Visibility.Visible;
                                     ManagementContainer.Visibility = Visibility.Visible;
                                     _detailPanelBuilder.ApplySectionOrder();
@@ -633,6 +636,8 @@ public sealed partial class MainWindow : Window
                     OverridesContainer.Visibility = Visibility.Collapsed;
                     NeuralRenderingPanel.Children.Clear();
                     NeuralRenderingContainer.Visibility = Visibility.Collapsed;
+                    NtcTexturesPanel.Children.Clear();
+                    NtcTexturesContainer.Visibility = Visibility.Collapsed;
                     NvidiaProfilePanel.Children.Clear();
                     NvidiaProfileContainer.Visibility = Visibility.Collapsed;
                     ManagementPanel.Children.Clear();
@@ -647,6 +652,8 @@ public sealed partial class MainWindow : Window
                     OverridesContainer.Visibility = Visibility.Collapsed;
                     NeuralRenderingPanel.Children.Clear();
                     NeuralRenderingContainer.Visibility = Visibility.Collapsed;
+                    NtcTexturesPanel.Children.Clear();
+                    NtcTexturesContainer.Visibility = Visibility.Collapsed;
                     NvidiaProfilePanel.Children.Clear();
                     NvidiaProfileContainer.Visibility = Visibility.Collapsed;
                     ManagementPanel.Children.Clear();

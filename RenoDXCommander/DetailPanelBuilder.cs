@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Media;
 using RenoDXCommander.Models;
+using Microsoft.Extensions.DependencyInjection;
 using RenoDXCommander.Services;
 using RenoDXCommander.ViewModels;
 using System.IO;
@@ -34,6 +35,8 @@ public partial class DetailPanelBuilder
     private readonly IOptiScalerWikiService _optiScalerWikiService;
     private readonly IHdrDatabaseService _hdrDatabaseService;
     private readonly IOptiScalerService _optiScalerService;
+    private readonly INtcService _ntcService;
+    private readonly IBethesdaArchiveService _bethesdaService;
 
     public DetailPanelBuilder(
         MainWindow window,
@@ -47,7 +50,8 @@ public partial class DetailPanelBuilder
         IShaderPackService shaderPackService,
         IOptiScalerWikiService optiScalerWikiService,
         IHdrDatabaseService hdrDatabaseService,
-        IOptiScalerService optiScalerService)
+        IOptiScalerService optiScalerService,
+        INtcService ntcService)
     {
         _window = window;
         _dispatcherQueue = window.DispatcherQueue;
@@ -62,6 +66,8 @@ public partial class DetailPanelBuilder
         _optiScalerWikiService = optiScalerWikiService;
         _hdrDatabaseService = hdrDatabaseService;
         _optiScalerService = optiScalerService;
+        _ntcService = ntcService;
+        _bethesdaService = App.Services.GetRequiredService<IBethesdaArchiveService>();
 
         // Set hand cursor on link buttons so they feel like clickable links
         var handCursor = Microsoft.UI.Input.InputSystemCursor.Create(Microsoft.UI.Input.InputSystemCursorShape.Hand);

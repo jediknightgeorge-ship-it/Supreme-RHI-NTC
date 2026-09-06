@@ -108,6 +108,8 @@ public partial class App : Application
         services.AddSingleton<IDlssStreamlineService, DlssStreamlineService>();
         services.AddSingleton<DlssPresetService>();
         services.AddSingleton<DofFixService>();
+        services.AddSingleton<INtcService, NtcService>();
+        services.AddSingleton<IBethesdaArchiveService, BethesdaArchiveService>();
         services.AddSingleton<UltimateAsiLoaderService>();
         services.AddSingleton<DlssNrCostScalerService>();
         services.AddSingleton<Rtx40MfgService>();

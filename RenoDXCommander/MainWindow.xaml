@@ -6,7 +6,7 @@
     xmlns:vm="using:RenoDXCommander.ViewModels"
     xmlns:converters="using:RenoDXCommander.Converters"
     xmlns:controls="using:RenoDXCommander.Controls"
-    Title="RHI">
+    Title="Supreme RHI + NTC [BETA]">
     <Grid RequestedTheme="Dark" Background="{StaticResource SurfaceBaseBrush}" AllowDrop="True" DragOver="Grid_DragOver" Drop="Grid_Drop">
         <Grid.Resources>
             <x:Double x:Key="CardItemWidth">390</x:Double>
@@ -1102,6 +1102,14 @@
                                 BorderBrush="{StaticResource BorderDefaultBrush}" BorderThickness="1"
                                 Padding="14,12" Visibility="Collapsed">
                             <StackPanel x:Name="NeuralRenderingPanel" x:FieldModifier="internal" Spacing="6"/>
+                        </Border>
+
+                        <!-- ── NTC Texture Compression section (Supreme RHI + NTC) ── -->
+                        <Border x:Name="NtcTexturesContainer" x:FieldModifier="internal"
+                                Background="{StaticResource SurfaceComponentTableBrush}" CornerRadius="12"
+                                BorderBrush="{StaticResource BorderDefaultBrush}" BorderThickness="1"
+                                Padding="14,12" Visibility="Collapsed">
+                            <StackPanel x:Name="NtcTexturesPanel" x:FieldModifier="internal" Spacing="6"/>
                         </Border>
 
                         <!-- ── Nvidia Profile Overrides section ── -->
